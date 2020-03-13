@@ -6,18 +6,25 @@ const { Task } = require("../models");
 class taskController {
   static addTask(req, res, next) {
     const UserId = req.user.id;
-    const { title, category } = req.body;
-    Task.create({ title, category, UserId })
+    const body = {
+      title : req.body.title,
+      category : 'todo',
+      description : req.body.description,
+      UserId : UserId
+    }
+    Task.create(body)
       .then(data => {
         res.status(201).json(data);
       })
       .catch(err => {
+        console.log(err)
         next(err);
       });
   }
 
   static findAll(req, res, next) {
-    Task.findAll()
+    const UserId = +req.user.id;
+    Task.findAll({where : {UserId}})
       .then(data => {
         res.status(200).json(data);
       })
@@ -27,10 +34,11 @@ class taskController {
   }
 
   static update(req, res, next) {
+    console.log(req.body)
     const UserId = +req.user.id;
     const id = +req.params.id;
-    const { title, category } = req.body;
-    Task.update({ title, category }, { where: { id, UserId }, returning: true })
+    const { title, category, description } = req.body;
+    Task.update({ title, category, description }, { where: { id, UserId }, returning: true })
       .then(data => {
         res.status(200).json(data[1]);
       })

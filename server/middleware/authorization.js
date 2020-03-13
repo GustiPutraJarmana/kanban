@@ -5,7 +5,6 @@ module.exports = (req, res, next) => {
     const id = req.params.id
     Task.findOne({where : {id, UserId}})
         .then(data => {
-            console.log(data)
             if (data !== null && UserId === UserId) {
                 next()
             } else {

@@ -6,6 +6,6 @@ const userRouter = require("./userRouter");
 
 Router
     .use('/user', userRouter)
-    .use('/task', taskRouter);
+    .use('/tasks', taskRouter);
 
 module.exports = Router;

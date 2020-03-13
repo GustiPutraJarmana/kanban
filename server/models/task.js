@@ -33,6 +33,20 @@ module.exports = (sequelize, DataTypes) => {
             msg: "catagoty can not empty"
           }
         }
+      },
+      description: {
+        type: DataTypes.STRING,
+        allowNull:false,
+        validate: {
+          notNull: {
+            args: true,
+            msg: 'description can not empty'
+          },
+          notEmpty: {
+            args: true,
+            msg: 'description can not empty'
+          }
+        }
       }
     },
     { sequelize }
