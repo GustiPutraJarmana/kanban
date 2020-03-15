@@ -3,10 +3,10 @@
 <template>
   <div>
     <div id="login" v-if="!isLogin">
-      <Login v-if="!isRegister" @showRegister="showRegister" @doLog="checkLogin"></Login>
+      <Login v-if="!isRegister" @showRegister="showRegister" @doLog="checkLogin" @google="google"></Login>
       <Register v-if="isRegister" @showLogin="checkLogin"></Register>
     </div>
-    <div v-if="isLogin" class="section-title mt-4">
+    <div v-if="isLogin" class="section-title">
       <Navbar @logoutButton="logOut"></Navbar>
       <div class="col ml-2">
         </div>
@@ -15,10 +15,9 @@
          <b-button v-b-modal.modal-prevent-closing style="border-radius:50%; background-color:#79bae5 !important;"><i class="fas fa-plus"></i></b-button>
         </div>
       <div class="container">
-      <Category :dataTask="dataTask" @refresh="refresh" @refresh2="refresh2" @delete="deleteData" @editForm="editForm"></Category>
+      <Category :dataTask="dataTask" @refresh="refresh" @delete="deleteData"  @editForm="isEdit"></Category>
     </div>
   </div>
-    <Edit v-if="isEdit" @editForm="editForm"  :editData="editData"></Edit>
 </template>
 
 <script>
@@ -26,7 +25,6 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Navbar from "./components/Navbar";
 import Category from "./components/Category";
-import Edit from "./components/Edit"
 import axios from "axios";
 import Swal from "sweetalert2"
 import AddData from "./components/addData"
@@ -39,17 +37,13 @@ export default {
     Register,
     Navbar,
     Category,
-    Edit,
-    AddData
+    AddData,
   },
   created() {
     this.checkLogin()
   },
   data() {
     return {
-      editData: "",
-      input_title : '',
-      input_description: '',
       dataTask: {
         todo: null,
         doing: null,
@@ -58,11 +52,9 @@ export default {
       },
       isLogin: false,
       isRegister: false,
-      isEdit: false
     };
   },
   methods: {
-
     showRegister() {
    this.isRegister = true
     },
@@ -97,7 +89,7 @@ export default {
           this.dataTask.completed = completed;
         })
         .catch(err => {
-
+         
         });
     },
 
@@ -108,13 +100,19 @@ export default {
       } else {
         this.isRegister = false
         this.isLogin = false
-        this.isEdit = false
       }
     },
 
     logOut() {
       localStorage.removeItem('token');
       this.checkLogin()
+       Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Logging Out!",
+            showConfirmButton: false,
+            timer: 1500
+          });
     },
     
     addData() {
@@ -124,19 +122,15 @@ export default {
     refresh() {
       this.findAll()
     },
-
-    refresh2() {
-      this.findAll()
-    },
-
-    editForm(data) {
-      console.log(data," INI APP");
-      this.editData = data
-      this.isEdit= true
-    },
-    
     deleteData() {
       this.findAll()
+    },
+
+    isEdit() {
+      isEdit= true
+    },
+    google() {
+      
     }
   }
 };

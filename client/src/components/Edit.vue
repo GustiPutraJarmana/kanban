@@ -8,10 +8,9 @@
           <b-form-group id="input-group-1" label="Title:" label-for="input-1">
             <b-form-input
               id="input-1"
-              v-model="editData.title"
+              v-model="title"
               type="text"
               required
-              placeholder="Enter title"
             ></b-form-input>
           </b-form-group>
 
@@ -22,25 +21,31 @@
           >
             <b-form-input
               id="input-1"
-              v-model="editData.description"
+              v-model="description"
               type="text"
               required
-              placeholder="Description"
             ></b-form-input>
           </b-form-group>
 
           <div>
+             <b-form-group
+            id="input-group-1"
+            label="Category:"
+            label-for="input-1"
+          >
             <b-form-select
               v-model="selected"
               :options="options"
               size="sm"
               class="mt-3"
             ></b-form-select>
-            <div class="mt-3"></div>
+            <div class="mt-3">
+
+            </div>
           </div>
-          <div class="container text-danger">
-            <b-button type="reset" variant="danger">Cancel</b-button>
-            <b-button type="submit" variant="primary">Edit</b-button>
+          <div class="container text-center">
+            <b-button type="submit" variant="primary" >Edit</b-button>
+            <b-button type="button" @click="cancelEdit" variant="danger">Cancel</b-button>
           </div>
         </b-form>
       </div>
@@ -53,15 +58,12 @@ import axios from "axios";
 import url from "../config/config";
 
 export default {
-  props: ["editData"],
+  props: ["detailTask"],
   data() {
     return {
-      form: {
-        title: "",
-        description: "",
-        category: ""
-      },
-      selected: this.editData.category,
+        title: this.detailTask.title,
+        description: this.detailTask.description,
+      selected: this.detailTask.category,
       options: [
         { value: null, text: "Please select an option" },
         { value: "todo", text: "Todo" },
@@ -73,32 +75,35 @@ export default {
     };
   },
   mounted() {
-    console.log(this.editData);
-  },
-  watch: {
-    selected() {
-      this.selected = this.editData.category;
-    }
+   console.log(this.detailTask)
   },
   methods: {
     edit() {
       axios({
         url: `${url}/tasks/${this.detailTask.id}`,
+        method : 'PUT',
         headers: {
           token: localStorage.token
         },
-        body: {
+        data: {
           title: this.title,
           description: this.description,
-          category: this.category
+          category: this.selected
         }
       })
         .then(data => {
-          console.log(data);
+          this.$emit('refresh')
+          if (data.data[0].category === this.detailTask.category) {
+          this.$emit('refresh')
+            console.log(data.data[0].category, 'masuuuuukkkk sini');
+          }
         })
         .catch(err => {
           console.log(err);
         });
+    },
+    cancelEdit() {
+      this.$emit('cancelEdit')
     }
   }
 };

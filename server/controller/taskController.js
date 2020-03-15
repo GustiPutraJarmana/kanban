@@ -34,7 +34,6 @@ class taskController {
   }
 
   static update(req, res, next) {
-    console.log(req.body)
     const UserId = +req.user.id;
     const id = +req.params.id;
     const { title, category, description } = req.body;

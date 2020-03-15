@@ -9,7 +9,7 @@ function hash(password) {
 }
 
 function compare(password, databasePass) {
-  return bcrypt.compare(password, databasePass)
+  return bcrypt.compareSync(password, databasePass)
 }
 
 module.exports = { hash, compare };

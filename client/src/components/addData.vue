@@ -45,6 +45,7 @@
 
 <script>
 import axios from 'axios'
+import Swal from "sweetalert2"
   export default {
     data() {
       return {
@@ -78,38 +79,28 @@ import axios from 'axios'
         }
       })
       .then(data => {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Data has added sucessful to Todo!",
+            showConfirmButton: false,
+            timer: 1500
+          });
         this.$emit('addData')
-        console.log(data)
       })
       .catch(err => {
-        console.log(err)
+        console.log(err.response.data.message)
+
+         const error = err.response.data.message
+        let errorStr = error.join('<li class="container text-left mx-5" style="margin-left: 6rem !important" >')
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            html: `<li class="container text-left mx-5" style="margin-left: 6rem !important">${errorStr}`,
+            footer: "made by love "
+          });
       })
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      
         this.handleSubmit()
       },
       handleSubmit(data) {

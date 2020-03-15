@@ -11,7 +11,7 @@
 #login .container #login-row #login-column #login-box {
   background-color: #fffcfc;
   background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png");
-  margin-top: 120px;
+  margin-top: 100px;
   max-width: 360px;
   height: 500px;
   border: 1px solid #9c9c9c;
@@ -24,7 +24,6 @@
   padding: 28px;
 }
 #login
-  .container
   #login-row
   #login-column
   #login-box
@@ -32,41 +31,77 @@
   #register-link {
   margin-top: -85px;
 }
-
-#register .container #register-row #register-column #register-box {
-  background-color: #fffcfc;
-  background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png");
-  margin-top: 120px;
-  max-width: 360px;
-  height: 500px;
-  border: 1px solid #9c9c9c;
-  border-radius: 20px;
-  -webkit-box-shadow: -3px 9px 10px 0px rgba(14, 136, 145, 0.48);
-  -moz-box-shadow: -3px 9px 10px 0px rgba(14, 136, 145, 0.48);
-  box-shadow: -3px 9px 10px 0px rgba(14, 136, 145, 0.48);
-}
-#register
-  .container
-  #register-row
-  #register-column
-  #register-box
-  #register-form {
-  padding: 28px;
-}
-#register
-  .container
-  #register-row
-  #register-column
-  #register-box
-  #register-form
-  #register-link {
-  margin-top: -85px;
-}
-
 .topmenu {
-  height: 65px;
   background: #697cc9;
-  color: #e1e2fa;
+  color: #c9caf8;
+}
+@-webkit-keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+
+  to {
+      opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+
+  to {
+      opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+
+  to {
+      opacity: 1;
+  }
+}
+
+.fadeIn {
+  opacity: 0;
+  -webkit-animation: fadeIn ease-in 1;
+  -moz-animation: fadeIn ease-in 1;
+  animation: fadeIn ease-in 1;
+
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+
+  -webkit-animation-duration: 0.6s;
+  -moz-animation-duration: 0.6s;
+  animation-duration: 0.6s;
+}
+
+.fadeIn.first {
+  -webkit-animation-delay: 0.4s;
+  -moz-animation-delay: 0.4s;
+  animation-delay: 0.2s;
+}
+
+.fadeIn.second {
+  -webkit-animation-delay: 0.6s;
+  -moz-animation-delay: 0.6s;
+  animation-delay: 0.4s;
+}
+
+.fadeIn.third {
+  -webkit-animation-delay: 0.8s;
+  -moz-animation-delay: 0.8s;
+  animation-delay: 0.6s;
+}
+
+.fadeIn.fourth {
+  -webkit-animation-delay: 1s;
+  -moz-animation-delay: 1s;
+  animation-delay: 0.8s;
 }
 
 a {
@@ -75,27 +110,35 @@ a {
 }
 
 .card {
-  height: 500px;
+  height: 440px;
   margin-left: 15px;
-  padding: 15px;
+  padding: 10px;
   width: 300px;
 }
 
 .card-todo {
   background: #fff;
   border: black solid 2px;
+  background-color: #ffffff;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
 }
 .card-doing {
   background: #fff;
   border: black solid 2px;
+  background-color: #ffffff;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
 }
 .card-done {
   background: #fff;
   border: black solid 2px;
+  background-color: #ffffff;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
 }
 .card-complate {
   background: #fff;
   border: black solid 2px;
+  background-color: #ffffff;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
 }
 
 .card-content {
@@ -105,12 +148,6 @@ a {
   font-size: 18px;
   border: #000 solid 1px;
   border-radius: 10px;
-}
-
-.author {
-  color: #999999;
-  font-size: 36px;
-  margin-top: 20px;
 }
 
 .item-container {
@@ -123,7 +160,7 @@ a {
   padding-left: 0px;
   margin-right: auto;
   margin-left: auto;
-  margin-bottom: 100px;
+  
 }
 
 .section-title {
@@ -131,12 +168,9 @@ a {
   background-image: url('./img/topImg.jpg');
   background-size: cover;
   opacity: 0.8;
+  
 }
 
 .item-container {
   border-radius: 10px;
-}
-
-.editForm {
-  width: 50%;
 }

@@ -19,26 +19,49 @@ class UserController {
   }
   
   static login(req, res, next) {
-    console.log('masukkkkkk')
     const { email, password } = req.body;
     User.findOne({ where: { email } })
-      .then(data => {
+    .then(data => {
+      console.log(data)
+      if (data) {
         if (compare(password, data.password)) {
           const obj = { id: data.id, email: data.email };
           res.status(200).json({ token: generateToken(obj) });
         } else {
-          throw error;
+          const error = {
+              status: 404,
+              message: "email or password wrong"
+            };
+          throw(error);
         }
-      })
-      .catch(err => {
+      }else {
         const error = {
           status: 404,
-          message: "data not found, you need to register first"
+          message: "email or password wrong"
         };
-        if (err) {
-          next(error);
-        }
+      throw(error);
+      }
+        
+      })
+      .catch(err => {
+
+        console.log(err)
+          next(err);
       });
+  }
+
+  static googleLogin(req, res, next) {
+    this.$gAuth.getAuthCode()
+.then(authCode => {
+  //on success
+  return this.$http.post('http://your-backend-server.com/auth/google', { code: authCode, redirect_uri: 'postmessage' })
+})
+.then(response => {
+  //after ajax
+})
+.catch(error => {
+  //on fail do something
+})
   }
 }
 
