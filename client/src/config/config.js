@@ -1,5 +1,5 @@
 /** @format */
 
-const url = "http://localhost:3000";
+const url = "https://frozen-hollows-01712.herokuapp.com";
 
 module.exports = url;
