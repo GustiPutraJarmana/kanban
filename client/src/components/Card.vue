@@ -46,6 +46,7 @@ box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75); background-color:yellow; opacity: 
 import Edit from './Edit'
 import axios from "axios";
 import url from "../config/config";
+import Swal from "sweetalert2";
 export default {
   name: "Card",
   props: ["detailTask"],
@@ -132,7 +133,14 @@ export default {
         data: {}
       })
         .then(data => {
-          console.log(data);
+          console.log(data.data.title)
+           Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `remove data with title ${data.data.title} succesful.`,
+            showConfirmButton: false,
+            timer: 1500
+          });
           this.$emit("delete", {});
         })
         .catch(err => {

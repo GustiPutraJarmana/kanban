@@ -80,6 +80,8 @@ import url from "../config/config"
         }
       })
       .then(data => {
+        this.dataAdd.title = '',
+        this.dataAdd.description = '',
           Swal.fire({
             position: "center",
             icon: "success",
