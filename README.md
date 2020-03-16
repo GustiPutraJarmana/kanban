@@ -6,7 +6,7 @@ KANBAN
 
 </h1>
 
-## Server router of Todo-List :
+## Server router of KANBAN :
 
 ### 1. POST /tasks
 
