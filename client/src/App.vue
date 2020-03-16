@@ -3,7 +3,7 @@
 <template>
   <div>
     <div id="login" v-if="!isLogin">
-      <Login v-if="!isRegister" @showRegister="showRegister" @doLog="checkLogin" @google="google"></Login>
+      <Login v-if="!isRegister" @showRegister="showRegister" @doLog="checkLogin"></Login>
       <Register v-if="isRegister" @showLogin="checkLogin"></Register>
     </div>
     <div v-if="isLogin" class="section-title">
@@ -104,6 +104,10 @@ export default {
     },
 
     logOut() {
+      var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+        console.log('User signed out.');
+    });
       localStorage.removeItem('token');
       this.checkLogin()
        Swal.fire({
@@ -129,9 +133,6 @@ export default {
     isEdit() {
       isEdit= true
     },
-    google() {
-      
-    }
   }
 };
 </script>

@@ -75,6 +75,7 @@
 import Vue from "vue";
 import axios from "axios";
 import Swal from "sweetalert2";
+import url from "../config/config"
 
 export default Vue.extend({
   name: "Register",
@@ -88,7 +89,7 @@ export default Vue.extend({
   methods: {
     register() {
       axios({
-        url: "http://localhost:3000/user/register",
+        url: `${url}/user/register`,
         method: "POST",
         data: {
           username: this.username,

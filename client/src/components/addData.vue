@@ -46,6 +46,7 @@
 <script>
 import axios from 'axios'
 import Swal from "sweetalert2"
+import url from "../config/config"
   export default {
     data() {
       return {
@@ -68,7 +69,7 @@ import Swal from "sweetalert2"
       },
       handleOk(bvModalEvt) {
       axios({
-        url: "http://localhost:3000/tasks",
+        url: `${url}/tasks`,
         method: 'POST',
         headers : {
             token : localStorage.getItem('token')
